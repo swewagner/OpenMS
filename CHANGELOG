@@ -317,6 +317,7 @@ Library:
   - Improved handling of terminal and residue specificity of modifications
   - Improved annotation of peptide identifications with spectrum references
   - Improved handling of unknown amino acids ("X") in sequences
+  - Support for C++11 (OpenMS now requires a compiler that supports C++11)
 
 File formats:
   - Improved mzML support for SONAR data and mzML with drift time (experimental)
