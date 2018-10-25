@@ -18,11 +18,12 @@ data <- read.csv(MSstats_input, sep=",", header=T, stringsAsFactors=T)
 quant <- OpenMStoMSstatsFormat(data, removeProtein_with1Feature=T)
 processed.quant <- dataProcess(quant, censoredInt = 'NA')
 dataProcessPlots(data=processed.quant, type="QCPlot",which.Protein="allonly")
+dataProcessPlots(data=processed.quant, type="ProfilePlot",which.Protein="all")
 
 comparison1<-matrix(c(-1,1),nrow=1) # 2/1
 
 comparison <- rbind(comparison1)
-row.names(comparison)<-c("Condition2-Condition1")
+row.names(comparison)<-c("PHH-HepG2")
 
 ############ also calculate missingness on condition level
 
@@ -201,7 +202,7 @@ for (acc in quant.runLevel$accession)
   else
   {
     PRT[w, PRT_assay_cols] <- quant.runLevel[q, RL_assay_cols]
-    PRT[w, PRT_stdv_cols] <- quant.runLevel[q, RL_assay_cols] # we currently store same data in stdv and assay column
+	PRT[w, PRT_stdv_cols] <- quant.runLevel[q, RL_assay_cols] # we currently store same data in stdv and assay column
   }
 }
 
