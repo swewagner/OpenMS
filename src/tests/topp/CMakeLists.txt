@@ -166,6 +166,13 @@ set_tests_properties("TOPP_CLI_INVALIDNAME" PROPERTIES WILL_FAIL 1)
 # TOPP tests
 #------------------------------------------------------------------------------
 
+#------------------------------------------------------------------------------
+# Qualitycontrol test
+add_test("TOPP_QualityControl_1" ${TOPP_BIN_PATH}/QualityControl -test -in_raw ${DATA_DIR_TOPP}/QualityControl_inRaw1.mzML ${DATA_DIR_TOPP}/QualityControl_inRaw2.mzML in_postFDR ${DATA_DIR_TOPP}/QualityControl_inPostFdr1.featureXML ${DATA_DIR_TOPP}/QualityControl_inPostFdr2.featureXML -in_trafo ${DATA_DIR_TOPP}QualityControl_inTrafo1.trafoXML ${DATA_DIR_TOPP}/QualityControl_inTrafo2.trafoXML -in_cm ${DATA_DIR_TOPP}/QualityControl_inConsensus.consensusXML in_contaminants ${DATA_DIR_TOPP}/QualityControl_inContaminants.fasta -out QualityControl_mzTab.mzTab.tmp -out_cm QualityControl_consensus.consensusXML.tmp)
+add_test("TOPP_QualityControl_1_out1" ${DIFF} -in1 QualityControl_mzTab.mzTab.tmp -in2 ${DATA_DIR_TOPP}/QualityControl_1_out.mzTab )
+add_test("TOPP_QualityControl_1_out1" ${DIFF} -in1 QualityControl_consensus.consensusXML.tmp -in2 ${DATA_DIR_TOPP}/QualityControl_1_outcm.consensusXML )
+set_tests_properties("TOPPP_QualityControl_1_out1" PROPERTIES DEPENDS "TOPP_QualityControl_1")
+
 # FuzzyDiff tests
 add_test("UTILS_FuzzyDiff_1" ${TOPP_BIN_PATH}/FuzzyDiff -test -ini ${DATA_DIR_TOPP}/FuzzyDiff.ini -in1 ${DATA_DIR_TOPP}/FuzzyDiff_1_in1.featureXML -in2 ${DATA_DIR_TOPP}/FuzzyDiff_1_in1.featureXML)
 add_test("UTILS_FuzzyDiff_2" ${TOPP_BIN_PATH}/FuzzyDiff -test -ini ${DATA_DIR_TOPP}/FuzzyDiff.ini -in1 ${DATA_DIR_TOPP}/FuzzyDiff_1_in1.featureXML -in2 ${DATA_DIR_TOPP}/FuzzyDiff_1_in2.featureXML)
@@ -2577,3 +2584,4 @@ set_tests_properties("UTILS_NucleicAcidSearchEngine_12_out" PROPERTIES DEPENDS "
 add_test("UTILS_RNAMassCalculator_1" ${TOPP_BIN_PATH}/RNAMassCalculator -test -in_seq "AUCGGC" -charge -1 -2 -out RNAMassCalculator.tmp)
 add_test("UTILS_RNAMassCalculator_1_out" ${DIFF} -in1 RNAMassCalculator.tmp -in2 ${DATA_DIR_TOPP}/RNAMassCalculator_1.txt)
 set_tests_properties("UTILS_RNAMassCalculator_1_out" PROPERTIES DEPENDS "UTILS_RNAMassCalculator_1")
+
